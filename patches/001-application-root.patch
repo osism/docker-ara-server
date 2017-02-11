@@ -1,0 +1,37 @@
+--- a/ara-repository/ara/webapp.py
++++ b/ara-repository/ara/webapp.py
+@@ -45,8 +45,10 @@ def create_app(config=None, app_name=None):
+     if app_name is None:
+         app_name = DEFAULT_APP_NAME
+
+-    app = Flask(app_name)
+-
++    app = Flask(
++        app_name,
++        static_url_path=os.environ.get('ARA_STATIC_URL_PATH', None)
++    )
+     configure_app(app, config)
+     configure_dirs(app)
+     configure_logging(app)
+@@ -60,11 +62,19 @@ def create_app(config=None, app_name=None):
+
+
+ def configure_blueprints(app):
++    application_root = app.config.get('APPLICATION_ROOT', '')
++
+     for view, prefix in views:
+-        app.register_blueprint(view, url_prefix=prefix)
++        app.register_blueprint(
++            view,
++            url_prefix=application_root + prefix
++        )
+
+     if app.config.get('ARA_ENABLE_DEBUG_VIEW'):
+-        app.register_blueprint(ara.views.debug, url_prefix='/debug')
++        app.register_blueprint(
++            ara.views.debug,
++            url_prefix=application_root + '/debug'
++        )
+
+
+ def configure_app(app, config):
