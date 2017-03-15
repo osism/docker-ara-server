@@ -6,7 +6,7 @@ MAINTAINER Betacloud Solutions GmbH (https://www.betacloud-solutions.de)
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG VERSION
-ENV VERSION ${VERSION:-0.11.0}
+ENV VERSION ${VERSION:-0.12.3}
 
 COPY files/extend_start.sh /extend_start.sh
 ADD patches /patches
