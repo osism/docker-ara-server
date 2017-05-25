@@ -32,3 +32,4 @@ RUN apt-get update \
 USER ara-server
 
 ENTRYPOINT ["/extend_start.sh"]
+EXPOSE 9191
