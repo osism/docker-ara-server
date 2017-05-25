@@ -20,7 +20,6 @@ RUN apt-get update \
         git \
     && pip install --upgrade pip \
     && git clone -b $VERSION https://github.com/openstack/ara /ara-repository \
-    && for patchfile in $(find patches -name "*.patch"); do patch -p1 < $patchfile; done \
     && pip install /ara-repository \
     && groupadd kolla \
     && useradd -m -d /var/lib/ara-server ara-server \
