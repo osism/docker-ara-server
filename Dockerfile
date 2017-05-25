@@ -9,7 +9,6 @@ ARG VERSION
 ENV VERSION ${VERSION:-0.13.1}
 
 COPY files/extend_start.sh /extend_start.sh
-ADD patches /patches
 
 RUN apt-get update \ 
     && apt-get install -y \ 
@@ -28,7 +27,7 @@ RUN apt-get update \
     && chown ara-server: /ara \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && rm -rf /ara-repository /patches
+    && rm -rf /ara-repository
 
 USER ara-server
 

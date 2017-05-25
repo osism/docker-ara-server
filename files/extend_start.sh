@@ -16,7 +16,7 @@ set -x
 # Set default values
 
 ARA_HOST=${ARA_HOST:-0.0.0.0}
-ARA_PORT=${ARA_PORT:-8080}
+ARA_PORT=${ARA_PORT:-9191}
 export ARA_DATABASE=${ARA_DATABASE:-sqlite:////ara/ara.sqlite}
 export ARA_DIR=${ARA_DIR:-/ara}
 export ARA_LOG_FILE=${ARA_LOG_FILE:-/ara/ara.log}
