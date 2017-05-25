@@ -1,0 +1,11 @@
+--- a/ara-repository/ara/webapp.py
++++ b/ara-repository/ara/webapp.py
+@@ -162,7 +162,7 @@ def configure_static_route(app):
+     # dots and we can decorate "serve_static_packaged" instead of, say,
+     # "static.serve_packaged".
+
+-    @app.route('/static/packaged/<module>/<path:filename>')
++    @app.route("/%s/static/packaged/<module>/<path:filename>" % app.config.get('APPLICATION_ROOT', ''))
+     def serve_static_packaged(module, filename):
+         xstatic = current_app.config['XSTATIC']
+
