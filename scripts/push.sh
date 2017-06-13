@@ -14,7 +14,6 @@ set -x
 # Set default values
 
 BUILD_OPTS=${BUILD_OPTS:-}
-REPOSITORY=${REPOSITORY:-registry.betacloud.io/betacloud/ara-server}
 
 # https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
 version-from-dockerfile() {
