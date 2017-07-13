@@ -18,6 +18,7 @@ RUN apt-get update \
         python-pip \ 
         git \
     && pip install --upgrade pip \
+    && pip install pymysql \
     && git clone -b $VERSION https://github.com/openstack/ara /ara-repository \
     && pip install /ara-repository \
     && groupadd kolla \
