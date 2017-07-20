@@ -1,6 +1,6 @@
 # docker-ara-server
 
-[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-betacloud%2Fara--server-blue.svg)](https://hub.docker.com/r/betacloud/ara-server/)
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-osism%2Fara--server-blue.svg)](https://hub.docker.com/r/osism/ara-server/)
 
 License
 -------
@@ -18,7 +18,7 @@ limitations under the License.
 Author information
 ------------------
 
-This Docker image was created by [Betacloud Solutions GmbH](https://betacloud-solutions.de).
+This Docker image was created by [Betacloud Solutions GmbH](https://www.betacloud-solutions.de).
 
 Notices
 -------
