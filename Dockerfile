@@ -16,19 +16,17 @@ RUN apt-get update \
         libssl-dev \
         python-dev \
         python-pip \ 
-        git \
+    && echo "[global]\nindex-url = https://devpi-0.betacloud.io/root/pypi/+simple/\ntrusted-host = devpi-0.betacloud.io" > /etc/pip.conf \
     && pip install --upgrade pip \
     && pip install pymysql \
-    && git clone -b $VERSION https://github.com/openstack/ara /ara-repository \
-    && pip install /ara-repository \
+    && pip install ara==$VERSION \
     && groupadd kolla \
     && useradd -m -d /var/lib/ara-server ara-server \
     && usermod -a -G kolla ara-server \
     && mkdir /ara \
     && chown ara-server: /ara \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && rm -rf /ara-repository
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER ara-server
 
