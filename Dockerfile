@@ -16,7 +16,6 @@ RUN apt-get update \
         libssl-dev \
         python-dev \
         python-pip \ 
-    && echo "[global]\nindex-url = https://devpi-0.betacloud.io/root/pypi/+simple/\ntrusted-host = devpi-0.betacloud.io" > /etc/pip.conf \
     && pip install --upgrade pip \
     && pip install pymysql \
     && pip install ara==$VERSION \
