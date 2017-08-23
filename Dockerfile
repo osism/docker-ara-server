@@ -2,13 +2,13 @@
 # which is part of this repository.
 
 FROM ubuntu:16.04
-MAINTAINER Betacloud Solutions GmbH (https://www.betacloud-solutions.de)
+LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG VERSION
 ENV VERSION ${VERSION:-0.14.0}
 
-COPY files/extend_start.sh /extend_start.sh
+COPY files/run.sh /run.sh
 
 RUN apt-get update \ 
     && apt-get install -y \ 
@@ -19,15 +19,16 @@ RUN apt-get update \
     && pip install --upgrade pip \
     && pip install pymysql \
     && pip install ara==$VERSION \
-    && groupadd kolla \
-    && useradd -m -d /var/lib/ara-server ara-server \
-    && usermod -a -G kolla ara-server \
-    && mkdir /ara \
-    && chown ara-server: /ara \
+    && useradd -m -d /ara ara \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/*
 
-USER ara-server
+USER ara
 
-ENTRYPOINT ["/extend_start.sh"]
+VOLUME ["/ara"]
 EXPOSE 9191
+
+CMD ["/run.sh"]
