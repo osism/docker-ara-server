@@ -6,7 +6,7 @@ LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG VERSION
-ENV VERSION ${VERSION:-0.14.0}
+ENV VERSION ${VERSION:-0.14.2}
 
 COPY files/run.sh /run.sh
 
