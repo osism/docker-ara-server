@@ -1,12 +1,9 @@
-# This file is subject to the terms and conditions defined in file 'LICENSE',
-# which is part of this repository.
-
 FROM ubuntu:16.04
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG VERSION
-ENV VERSION ${VERSION:-0.14.2}
+ENV VERSION ${VERSION:-0.14.3}
 
 COPY files/run.sh /run.sh
 
