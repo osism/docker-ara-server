@@ -18,7 +18,6 @@ env:
     - REPOSITORY=osism/ara-server
   matrix:
     - VERSION=0.14.6
-    - VERSION=0.14.5
 
 script:
   - bash scripts/build.sh
