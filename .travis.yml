@@ -12,6 +12,8 @@ env:
   matrix:
     - VERSION=0.14.6
     - VERSION=0.15.0
+    - VERSION=0.16.0
+    - VERSION=0.16.1
 
 script:
   - bash scripts/build.sh
