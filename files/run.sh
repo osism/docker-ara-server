@@ -25,4 +25,4 @@ if [[ ! -z $ARA_CONFIG ]]; then
     export ARA_CONFIG
 fi
 
-exec ara-manage runserver -p $ARA_PORT -h $ARA_HOST --threaded
+exec ara-manage runserver -p $ARA_PORT -h $ARA_HOST
