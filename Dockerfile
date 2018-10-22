@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM python:3.7
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -7,20 +7,9 @@ ENV VERSION ${VERSION:-0.16.1}
 
 COPY files/run.sh /run.sh
 
-RUN apt-get update \ 
-    && apt-get install -y \ 
-        libffi-dev \
-        libssl-dev \
-        python-dev \
-        python-pip \ 
-    && pip install pymysql \
-    && pip install ara==$VERSION \
-    && useradd -m -d /ara ara \
-    && apt-get clean \
-    && rm -rf \
-        /var/lib/apt/lists/* \
-        /tmp/* \
-        /var/tmp/*
+RUN pip3 install pymysql \
+    && pip3 install ara==$VERSION \
+    && useradd -m -d /ara ara
 
 USER ara
 
