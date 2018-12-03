@@ -17,3 +17,4 @@ VOLUME ["/ara"]
 EXPOSE 9191
 
 CMD ["/run.sh"]
+HEALTHCHECK CMD curl --fail http://localhost:9191/ || exit 1
