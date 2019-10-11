@@ -8,7 +8,8 @@ env:
   global:
     - REPOSITORY=osism/ara-server
   matrix:
-    - VERSION=0.16.5
+    - VERSION=latest
+    - VERSION=1.1.0
 
 script:
   - bash scripts/build.sh

@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-set -x
 
 # Available environment variables
 #
-# ARA_CONFIG
-# ARA_DATABASE
-# ARA_DIR
+# ARA_API_PASSWORD
+# ARA_API_USERNAME
 # ARA_HOST
-# ARA_LOG_FILE
 # ARA_PORT
+#
+# https://ara.readthedocs.io/en/latest/api-configuration.html#overview
 
 # Set default values
 
+ARA_API_PASSWORD=${ARA_API_PASSWORD:-password}
+ARA_API_USERNAME=${ARA_API_USERNAME:-ara}
 ARA_HOST=${ARA_HOST:-0.0.0.0}
-ARA_PORT=${ARA_PORT:-9191}
-export ARA_DATABASE=${ARA_DATABASE:-sqlite:////ara/ara.sqlite}
-export ARA_DIR=${ARA_DIR:-/ara}
-export ARA_LOG_FILE=${ARA_LOG_FILE:-ara.log}
+ARA_PORT=${ARA_PORT:-8000}
 
-if [[ ! -z $ARA_CONFIG ]]; then
-    export ARA_CONFIG
-fi
+until ara-manage migrate; do
+    echo "database migration failed, trying again in 10 seconds"
+    sleep 10
+done
 
-exec ara-manage runserver -p $ARA_PORT -h $ARA_HOST
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('$ARA_API_USERNAME', '$ARA_API_USERNAME@ara-server.local', '$ARA_API_PASSWORD')" | ara-manage shell
+exec ara-manage runserver $ARA_HOST:$ARA_PORT
