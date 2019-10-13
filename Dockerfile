@@ -13,6 +13,7 @@ RUN pip3 install PyMySQL mysqlclient \
     && useradd -m ara-server
 
 USER ara-server
+WORKDIR /home/ara-server
 
 EXPOSE 8000
 
