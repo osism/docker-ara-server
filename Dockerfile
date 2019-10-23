@@ -2,7 +2,7 @@ FROM python:3.7
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
-ENV VERSION ${VERSION:-1.1.0}
+ENV VERSION ${VERSION:-latest}
 
 ENV DEBIAN_FRONTEND noninteractive
 
