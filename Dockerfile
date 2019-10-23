@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY files/run.sh /run.sh
 
-RUN pip3 install PyMySQL mysqlclient \
+RUN pip3 install --no-cache-dir PyMySQL mysqlclient \
     && if [ $VERSION != "latest" ]; then pip3 install "ara[server]==$VERSION"; else pip3 install "ara[server]"; fi \
     && useradd -m ara-server
 
