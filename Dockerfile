@@ -1,16 +1,21 @@
-FROM python:3.7
+FROM python:3.7-alpine
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
 ENV VERSION ${VERSION:-latest}
 
-ENV DEBIAN_FRONTEND noninteractive
-
 COPY files/run.sh /run.sh
 
-RUN pip3 install --no-cache-dir PyMySQL mysqlclient \
+RUN apk add --no-cache \
+      mariadb-connector-c-dev \
+      curl \
+    && apk add --no-cache --virtual .build-deps \
+      build-base \
+      mariadb-dev \
+    && pip3 install --no-cache-dir PyMySQL mysqlclient \
     && if [ $VERSION != "latest" ]; then pip3 install "ara[server]==$VERSION"; else pip3 install "ara[server]"; fi \
-    && useradd -m ara-server
+    && adduser -D ara-server \
+    && apk del .build-deps
 
 USER ara-server
 WORKDIR /home/ara-server
@@ -18,4 +23,4 @@ WORKDIR /home/ara-server
 EXPOSE 8000
 
 CMD ["/run.sh"]
-HEALTHCHECK CMD curl --fail http://localhost:8000/ || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
