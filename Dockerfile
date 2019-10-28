@@ -2,7 +2,6 @@ FROM python:3.7-alpine
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
-ENV VERSION ${VERSION:-latest}
 
 COPY files/run.sh /run.sh
 
