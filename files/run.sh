@@ -16,6 +16,8 @@ ARA_API_USERNAME=${ARA_API_USERNAME:-ara}
 ARA_HOST=${ARA_HOST:-0.0.0.0}
 ARA_PORT=${ARA_PORT:-8000}
 
+source /opt/ara-server/bin/activate
+
 until ara-manage migrate; do
     echo "database migration failed, trying again in 10 seconds"
     sleep 10
