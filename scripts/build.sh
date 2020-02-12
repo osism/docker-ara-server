@@ -13,6 +13,8 @@ set -x
 
 BUILD_OPTS=${BUILD_OPTS:-}
 HASH_REPOSITORY=$(git rev-parse --short HEAD)
+REPOSITORY=${REPOSITORY:-osism/ara-server}
+VERSION=${VERSION:-latest}
 
 docker build \
     --build-arg "VERSION=$VERSION" \
