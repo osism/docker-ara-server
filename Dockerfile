@@ -2,6 +2,8 @@ FROM python:3.7-alpine
 
 ARG VERSION
 
+ENV TZ=UTC
+
 COPY files/run.sh /run.sh
 
 RUN apk add --no-cache \
