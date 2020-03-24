@@ -4,6 +4,7 @@ ARG VERSION
 
 ENV TZ=UTC
 
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
 COPY files/run.sh /run.sh
 
 RUN apk add --no-cache \
@@ -15,14 +16,15 @@ RUN apk add --no-cache \
     && pip3 install --no-cache-dir PyMySQL mysqlclient \
     && if [ $VERSION != "latest" ]; then pip3 install "ara[server]==$VERSION"; else pip3 install "ara[server]"; fi \
     && adduser -D ara-server \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && chmod +x /wait
 
 USER ara-server
 WORKDIR /home/ara-server
 
 EXPOSE 8000
 
-CMD ["/run.sh"]
+CMD ["sh", "-c", "/wait && /run.sh"]
 HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 
 LABEL "org.opencontainers.image.documentation"="https://docs.osism.io" \
