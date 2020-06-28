@@ -27,8 +27,8 @@ EXPOSE 8000
 CMD ["sh", "-c", "/wait && /run.sh"]
 HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 
-LABEL "org.opencontainers.image.documentation"="https://docs.osism.io" \
+LABEL "org.opencontainers.image.documentation"="https://docs.osism.de" \
       "org.opencontainers.image.licenses"="ASL 2.0" \
-      "org.opencontainers.image.source"="https://github.com/osism/docker-kolla-ansible" \
+      "org.opencontainers.image.source"="https://github.com/osism/docker-ara-server" \
       "org.opencontainers.image.url"="https://www.osism.de" \
       "org.opencontainers.image.vendor"="Betacloud Solutions GmbH"
