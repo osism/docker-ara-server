@@ -15,7 +15,7 @@ RUN apk add --no-cache \
       mariadb-dev \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir PyMySQL mysqlclient gunicorn pyyaml \
-    && if [ $VERSION != "latest" ]; then pip3 install "ara[server]==$VERSION"; else pip3 install "ara[server]"; fi \
+    && if [ $VERSION != "latest" ]; then pip3 install --no-cache-dir "ara[server]==$VERSION"; else pip3 install --no-cache-dir "ara[server]"; fi \
     && adduser -D ara-server \
     && apk del .build-deps \
     && chmod +x /wait
