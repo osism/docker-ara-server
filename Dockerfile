@@ -5,6 +5,8 @@ ARG VERSION
 ENV TZ=UTC
 
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+
+COPY files/requirements.txt /requirements.txt
 COPY files/run.sh /run.sh
 
 RUN apk add --no-cache \
@@ -14,7 +16,7 @@ RUN apk add --no-cache \
       build-base \
       mariadb-dev \
     && pip3 install --no-cache-dir --upgrade pip \
-    && pip3 install --no-cache-dir PyMySQL mysqlclient gunicorn pyyaml \
+    && pip3 install --no-cache-dir -r /requirements.txt \
     && if [ $VERSION != "latest" ]; then pip3 install --no-cache-dir "ara[server]==$VERSION"; else pip3 install --no-cache-dir "ara[server]"; fi \
     && adduser -D ara-server \
     && apk del .build-deps \
