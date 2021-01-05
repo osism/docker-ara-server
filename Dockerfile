@@ -14,6 +14,7 @@ RUN apk add --no-cache \
       curl \
     && apk add --no-cache --virtual .build-deps \
       build-base \
+      libffi-dev \
       mariadb-dev \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir -r /requirements.txt \

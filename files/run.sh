@@ -7,6 +7,7 @@
 # ARA_HOST
 # ARA_PORT
 # ARA_WORKERS
+# ARA_WORKER_CLASS
 #
 # https://ara.readthedocs.io/en/latest/api-configuration.html#overview
 
@@ -17,6 +18,7 @@ ARA_API_USERNAME=${ARA_API_USERNAME:-ara}
 ARA_HOST=${ARA_HOST:-0.0.0.0}
 ARA_PORT=${ARA_PORT:-8000}
 ARA_WORKERS=${ARA_WORKERS:-5}
+ARA_WORKER_CLASS=${ARA_WORKER_CLASS:-eventlet}
 
 until ara-manage migrate; do
     echo "database migration failed, trying again in 10 seconds"
@@ -28,4 +30,4 @@ if [ $result == "False" ]; then
     echo "from django.contrib.auth.models import User; User.objects.create_superuser('$ARA_API_USERNAME', '$ARA_API_USERNAME@ara-server.local', '$ARA_API_PASSWORD')" | ara-manage shell
 fi
 
-exec gunicorn --workers $ARA_WORKERS --bind $ARA_HOST:$ARA_PORT ara.server.wsgi
+exec gunicorn --workers $ARA_WORKERS --worker-class $WORKER_CLASS --bind $ARA_HOST:$ARA_PORT ara.server.wsgi
