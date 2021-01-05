@@ -30,4 +30,4 @@ if [ $result == "False" ]; then
     echo "from django.contrib.auth.models import User; User.objects.create_superuser('$ARA_API_USERNAME', '$ARA_API_USERNAME@ara-server.local', '$ARA_API_PASSWORD')" | ara-manage shell
 fi
 
-exec gunicorn --workers $ARA_WORKERS --worker-class $WORKER_CLASS --bind $ARA_HOST:$ARA_PORT ara.server.wsgi
+exec gunicorn --workers $ARA_WORKERS --worker-class $ARA_WORKER_CLASS --bind $ARA_HOST:$ARA_PORT ara.server.wsgi
