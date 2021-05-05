@@ -11,6 +11,7 @@ COPY files/run.sh /run.sh
 
 RUN apk add --no-cache \
       mariadb-connector-c-dev \
+      alpine-baselayout \
       curl \
     && apk add --no-cache --virtual .build-deps \
       build-base \
