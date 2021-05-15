@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM pypy:3.7-slim
 
 ARG VERSION
 
@@ -9,19 +9,29 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait
 COPY files/requirements.txt /requirements.txt
 COPY files/run.sh /run.sh
 
-RUN apk add --no-cache \
-      mariadb-connector-c-dev \
-      curl \
-    && apk add --no-cache --virtual .build-deps \
-      build-base \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      build-essential \
+      gcc \
       libffi-dev \
-      mariadb-dev \
+      libmariadbclient-dev \
+      libssl-dev \
+      libyaml-dev \
     && pip3 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir -r /requirements.txt \
     && if [ $VERSION != "latest" ]; then pip3 install --no-cache-dir "ara[server]==$VERSION"; else pip3 install --no-cache-dir "ara[server]"; fi \
-    && adduser -D ara-server \
-    && apk del .build-deps \
-    && chmod +x /wait
+    && useradd ara-server \
+    && chmod +x /wait \
+    && apt-get clean \
+    && apt-get remove -y \
+      build-essential \
+      gcc \
+      libffi-dev \
+      libmariadbclient-dev \
+      libssl-dev \
+      libyaml-dev \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 USER ara-server
 WORKDIR /home/ara-server
