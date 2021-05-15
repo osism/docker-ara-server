@@ -5,7 +5,6 @@ set -x
 #
 # BUILD_OPTS
 # DOCKER_REGISTRY
-# PYTHON_VERSION
 # REPOSITORY
 # VERSION
 
@@ -14,7 +13,6 @@ set -x
 BUILD_OPTS=${BUILD_OPTS:-}
 CREATED=$(date --rfc-3339=ns)
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
-PYTHON_VERSION=${PYTHON_VERSION:-3.7}
 REVISION=$(git rev-parse HEAD)
 VERSION=${VERSION:-latest}
 
@@ -24,7 +22,6 @@ fi
 
 docker buildx build \
     --load \
-    --build-arg "PYTHON_VERSION=$PYTHON_VERSION" \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$REVISION" \
     --label "org.opencontainers.image.created=$CREATED" \
