@@ -12,6 +12,7 @@ COPY files/run.sh /run.sh
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       build-essential \
+      curl \
       gcc \
       libffi-dev \
       libmariadbclient-dev \
