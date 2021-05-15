@@ -15,6 +15,7 @@ RUN apt-get update \
       curl \
       gcc \
       libffi-dev \
+      libmariadb3 \
       libmariadbclient-dev \
       libssl-dev \
       libyaml-dev \
