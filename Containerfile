@@ -4,7 +4,7 @@ ARG VERSION
 
 ENV TZ=UTC
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
 
 COPY files/requirements.txt /requirements.txt
 COPY files/run.sh /run.sh
